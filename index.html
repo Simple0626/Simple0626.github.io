@@ -156,6 +156,181 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/23/composer-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Simple">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Simple">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/09/23/composer-1/" class="post-title-link" itemprop="url">composer</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-09-23 08:20:55 / 修改时间：08:26:03" itemprop="dateCreated datePublished" datetime="2022-09-23T08:20:55+08:00">2022-09-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="安装composer"><a href="#安装composer" class="headerlink" title="安装composer"></a>安装composer</h1><p>运行 Composer 需要 PHP 5.3.2+ 以上版本<br>配合phpstudy使用</p>
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>将PHPstudy的环境变量设置一下<br>![Pasted image 20220922204945](..\images\Pasted image 20220922204945.png)</p>
+<h2 id="配置PHP拓展"><a href="#配置PHP拓展" class="headerlink" title="配置PHP拓展"></a>配置PHP拓展</h2><p>php.ini中开启以下拓展</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">extension=php_openssl.dll</span><br><span class="line">extension=php_pdo_mysql.dll</span><br><span class="line">extension=php_mbstring.dll</span><br><span class="line">extension=php_fileinfo.dll</span><br><span class="line">extension=php_curl.dll</span><br><span class="line">extension=php_gd2.dll</span><br><span class="line">extension=php_soap.dll</span><br><span class="line">extension=php_mysqli.dll</span><br><span class="line">extension=php_sockets.dll </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmd中查看可用拓展</span><br><span class="line">php -m</span><br><span class="line">php -m | findstr gd </span><br></pre></td></tr></table></figure>
+
+<h2 id="下载composer"><a href="#下载composer" class="headerlink" title="下载composer"></a>下载composer</h2><p>下载composer.phar</p>
+<p>![Pasted image 20220923080731.png](..\images\Pasted image 20220923080731.png)将composer.phar复制到<br>![[Pasted image 20220923080815.png]](..\images\Pasted image 20220923080815.png)<br>命令创建.bat文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo @php &quot;%~dp0composer.phar&quot; %*&gt;composer.bat</span><br></pre></td></tr></table></figure>
+
+<p>![[Pasted image 20220923080934.png]](..&#x2F;images&#x2F;Pasted image 20220923080934.png)</p>
+<p>![[Pasted image 20220923080949.png]](..&#x2F;images&#x2F;Pasted image 20220923080949.png)</p>
+<h2 id="composer-换源"><a href="#composer-换源" class="headerlink" title="composer 换源"></a>composer 换源</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#国内源</span></span><br><span class="line">composer config -g repo.packagist composer https:<span class="comment">//packagist.phpcomposer.com </span></span><br><span class="line"><span class="comment">#阿里云：</span></span><br><span class="line">composer config -g repo.packagist composer https:<span class="comment">//mirrors.aliyun.com/composer/ </span></span><br><span class="line"><span class="comment">#华为云： </span></span><br><span class="line">composer config -g repo.packagist composer https:<span class="comment">//repo.huaweicloud.com/repository/php/</span></span><br><span class="line"><span class="comment">#官方源</span></span><br><span class="line">composer config -g repo.packagist composer https:<span class="comment">//repo.packagist.org</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>查看composer全局配置</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer config -gl </span><br></pre></td></tr></table></figure>
+
+<h1 id="安装thinkphp"><a href="#安装thinkphp" class="headerlink" title="安装thinkphp"></a>安装thinkphp</h1><p>稳定版</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer create-project topthink/think tp</span><br></pre></td></tr></table></figure>
+
+<p>更新<br>composer update topthink&#x2F;framework</p>
+<p>开发版<br>composer create-project topthink&#x2F;think&#x3D;6.0.x-dev tp</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/12/%E6%95%B0%E6%8D%AE%E5%BA%93-ALPHA%E8%AF%AD%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="Simple">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Simple">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/12/%E6%95%B0%E6%8D%AE%E5%BA%93-ALPHA%E8%AF%AD%E8%A8%80/" class="post-title-link" itemprop="url">数据库:ALPHA语言</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-06-12 16:49:33 / 修改时间：18:43:44" itemprop="dateCreated datePublished" datetime="2022-06-12T16:49:33+08:00">2022-06-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Alpha语言"><a href="#Alpha语言" class="headerlink" title="Alpha语言"></a>Alpha语言</h1><p>主要有六条语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET PUT HOLD UPDATE DELETE DROP</span><br></pre></td></tr></table></figure>
+
+<p>分个类：</p>
+<ul>
+<li>检索语句：GET</li>
+<li>更新语句：PUT，HOLD，UPDATE，DELETE，DROP</li>
+</ul>
+<p><strong>最基本的格式：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">操作语句  工作空间（表达式）： 操作条件</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="GET："><a href="#GET：" class="headerlink" title="GET："></a>GET：</h2><p>作用就是来检索的，检索也是最常用的</p>
+<h3 id="简单检索："><a href="#简单检索：" class="headerlink" title="简单检索："></a>简单检索：</h3><p>没有限制条件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET (工作空间名) (表达式1)</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<p>查询所有被选修的课程号码：GET W (SC.Cno)</p>
+<p>查询所有学生的数据：GET W (Student)</p>
+<h3 id="限定的检索："><a href="#限定的检索：" class="headerlink" title="限定的检索："></a>限定的检索：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET (工作空间名) (表达式1) ：条件</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<p>查询计算机系(CS)中年龄小于20岁的学生的学号和年龄：</p>
+<p><code>GET W (S.Sno，S.Sage)：S.Sdept=&#39;CS&#39;ΛS.Sage&lt;20</code></p>
+<p>查询计算机系(CS)中年龄小于20岁的学生的学号和姓名：</p>
+<p><code>GET W (S.Sno，S.SN)：S.Sdept=&#39;CS&#39;ΛS.Sage&lt;20</code></p>
+<h3 id="带排序的检索："><a href="#带排序的检索：" class="headerlink" title="带排序的检索："></a>带排序的检索：</h3><p>例如：</p>
+<p>查询信息系（IS）学生的学号、年龄，并按年龄降序排序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET W（S.SNO,S.AGE）: S.DEPT = &#x27;IS&#x27; DOWN S.AGE </span><br></pre></td></tr></table></figure>
+
+<p>DOWN 代表降序，升序就是UP</p>
+<h3 id="带定额的检索"><a href="#带定额的检索" class="headerlink" title="带定额的检索"></a>带定额的检索</h3><p>取出一个信息系学生的学号：</p>
+<p><code>GET W (1) (Student.Sno)：Student.Sdept=&#39;IS&#39;</code></p>
+<p>查询信息系年龄最大的三个学生的学号及其年龄，结果按照年龄降序排序：</p>
+<p><code>GET W (3) (Student.Sno，Student.Sage)：Student.Sdept=&#39;IS&#39;Λ DOWN Student.Sage</code></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/02/Filter%E5%AE%9E%E7%8E%B0%E6%9D%83%E9%99%90%E6%8B%A6%E6%88%AA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1022,7 +1197,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1035,7 +1210,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
